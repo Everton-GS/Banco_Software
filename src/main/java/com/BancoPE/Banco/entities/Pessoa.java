@@ -1,7 +1,7 @@
 package com.BancoPE.Banco.entities;
 
-import java.time.LocalDateTime;
-
+import java.time.LocalDate;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.Column;
 import jakarta.persistence.MappedSuperclass;
 import lombok.AllArgsConstructor;
@@ -22,8 +22,9 @@ public abstract class Pessoa {
     @Column(name = "genero")
     private String genero;
 
+    @JsonFormat(pattern = "dd-MM-yyyy", timezone = "UTC")
     @Column(name = "nascimento")
-    private LocalDateTime nascimento;
+    private LocalDate nascimento;
 
     @Column(name = "endereco")
     private String endereco;

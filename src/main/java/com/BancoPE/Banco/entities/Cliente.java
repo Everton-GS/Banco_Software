@@ -1,7 +1,7 @@
 package com.BancoPE.Banco.entities;
 
-import java.time.LocalDateTime;
-
+import java.time.LocalDate;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -18,11 +18,14 @@ public class Cliente extends Pessoa {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_cliente")
     private Long id;
 
-    public Cliente(Long id,String nome,String genero,LocalDateTime nascimento,String endereco,String telefone,String email){
+    public Cliente(Long id,String nome,String genero,LocalDate nascimento,String endereco,String telefone,String email){
         super(nome,genero,nascimento,endereco,telefone,email);
         this.id=id;
         
     }
+
+    
 }

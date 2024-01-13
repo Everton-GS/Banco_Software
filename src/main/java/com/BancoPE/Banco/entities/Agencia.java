@@ -22,11 +22,8 @@ public class Agencia {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "agencia")
+    @Column(length =4, name = "agencia" )
     private String numero;
-
-    @Column(name = "gerente")
-    Funcionario funcionario;
 
     @Column(name = "endereco")
     private String endereco;
