@@ -20,6 +20,7 @@ import lombok.Setter;
 public class Agencia {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_agencia")
     private Long id;
 
     @Column(length =4, name = "agencia" )
