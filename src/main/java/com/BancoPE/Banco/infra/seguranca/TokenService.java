@@ -6,6 +6,7 @@ import java.time.ZoneOffset;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import com.BancoPE.Banco.entities.Cliente;
+import com.BancoPE.Banco.entities.Funcionario;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTCreationException;
@@ -17,7 +18,7 @@ public class TokenService {
     @Value("${api.security.token.secret}")
     private String secrete;
 
-    public String gerarToken(Cliente cliente) {
+    public String gerarTokenCliente(Cliente cliente) {
         try {
             Algorithm algorithm = Algorithm.HMAC512(secrete);
             String token = JWT.create()
@@ -29,6 +30,20 @@ public class TokenService {
 
         } catch (JWTCreationException jwt) {
             throw new RuntimeException("Erro while generating token", jwt);
+        }
+    }
+    public String gerarTokenFuncionario(Funcionario funcionario){
+        try {
+            Algorithm algorithm= Algorithm.HMAC512(secrete);
+            String token= JWT.create()
+                    .withIssuer("Banco_PE")
+                    .withSubject(funcionario.getLogin())
+                    .withExpiresAt(TempoToken())
+                    .sign(algorithm);
+                    return token;
+            
+        } catch (JWTCreationException JWT) {
+            throw new RuntimeException("Erro while generating token", JWT);
         }
     }
 

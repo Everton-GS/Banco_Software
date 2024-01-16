@@ -32,4 +32,11 @@ public class Agencia {
     @Column(name = "contato_agencia")
     private String telefoneAgencia;
 
+    public Agencia(String numero, String endereco, String telefoneAgencia) {
+        this.numero = numero;
+        this.endereco = endereco;
+        this.telefoneAgencia = telefoneAgencia;
+    }
+
+    
 }

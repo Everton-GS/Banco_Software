@@ -1,7 +1,8 @@
 package com.BancoPE.Banco.entities;
 
-public enum FuncionarioRole {
+public enum AcessoRole {
     
+    Cliente("cliente"),
     Atendente("atendente"),
     Gerente("gerente");
 
@@ -9,7 +10,7 @@ public enum FuncionarioRole {
     private String role;
 
 
-    private FuncionarioRole(String role){
+    private AcessoRole(String role){
         this.role=role;
     }
 

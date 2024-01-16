@@ -30,6 +30,9 @@ public class Cliente extends Pessoa  implements UserDetails{
     @JoinColumn(name = "id_cartao")
     ClienteCartao cartao;
 
+    @Column(name = "cargo")
+    AcessoRole cargo;
+
     public Cliente(Long id,String nome,String genero,LocalDate nascimento,String endereco,String telefone,String email){
         super(nome,genero,nascimento,endereco,telefone,email);
         this.id=id;

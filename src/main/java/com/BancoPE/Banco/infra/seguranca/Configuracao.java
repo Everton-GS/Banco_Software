@@ -28,6 +28,7 @@ public class Configuracao {
             .csrf(csrf -> csrf.disable())
             .authorizeHttpRequests(authorize -> authorize
                 .requestMatchers(HttpMethod.POST,"/agencia/cadastrar").permitAll()
+                .requestMatchers(HttpMethod.POST,"/gerente/registrar").permitAll()
                 .anyRequest().authenticated()
             )
             .httpBasic(Customizer.withDefaults())
