@@ -64,15 +64,6 @@ public class Cliente extends Pessoa  implements UserDetails{
         throw new UnsupportedOperationException("Unimplemented method 'isAccountNonLocked'");
     }
 
-    @Override
-    public boolean isCredentialsNonExpired() {
-        throw new UnsupportedOperationException("Unimplemented method 'isCredentialsNonExpired'");
-    }
-
-    @Override
-    public boolean isEnabled() {
-        throw new UnsupportedOperationException("Unimplemented method 'isEnabled'");
-    }
 
     
 }
