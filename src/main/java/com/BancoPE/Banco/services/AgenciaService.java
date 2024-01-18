@@ -14,7 +14,7 @@ public class AgenciaService {
      AgenciaRepository agenciaRepository;
 
 
-     public void adicionar( @NonNull Agencia agencia){
+     public void adicionar(@NonNull Agencia agencia){
         agenciaRepository.save(agencia);
      }
 

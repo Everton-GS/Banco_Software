@@ -1,16 +1,14 @@
 package com.BancoPE.Banco.infra.seguranca;
 
 import java.io.IOException;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
-import com.BancoPE.Banco.repository.ClienteRepository;
-import com.BancoPE.Banco.repository.FuncionarioRepository;
-
+import com.BancoPE.Banco.repository.ClienteCartaoRepository;
+import com.BancoPE.Banco.repository.FuncionarioAuthenticationRepository;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -26,10 +24,10 @@ public class FiltroSeguranca extends OncePerRequestFilter {
 
 
     @Autowired
-    ClienteRepository clienteRepository;
+    ClienteCartaoRepository cartaoRepository;
 
     @Autowired
-    FuncionarioRepository funcionarioRepository;
+    FuncionarioAuthenticationRepository funcionarioAuthenticationRepository;
 
     @Override
     protected void doFilterInternal(@NonNull HttpServletRequest request,@NonNull HttpServletResponse response, @NonNull FilterChain filterChain)throws ServletException, IOException {
@@ -37,15 +35,13 @@ public class FiltroSeguranca extends OncePerRequestFilter {
         String token= this.recoverToken(request);
         if(token!= null){
             String login = tokenService.validarToken(token);
-
             UserDetails user;
-            
-            user=clienteRepository.findByCartao(login);
+            user= cartaoRepository.findByCartao(login);
             if(user!=null){
                 var authentication = new UsernamePasswordAuthenticationToken(user,null,user.getAuthorities());
                 SecurityContextHolder.getContext().setAuthentication(authentication);
             }else{
-               UserDetails usuarioFuncionario =funcionarioRepository.findByNome(login);
+               UserDetails usuarioFuncionario = funcionarioAuthenticationRepository.findByLogin(login);
                 var authentication = new UsernamePasswordAuthenticationToken(usuarioFuncionario,null,usuarioFuncionario.getAuthorities());
                 SecurityContextHolder.getContext().setAuthentication(authentication);
             }

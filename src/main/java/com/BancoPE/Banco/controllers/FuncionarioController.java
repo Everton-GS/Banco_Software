@@ -3,7 +3,6 @@ package com.BancoPE.Banco.controllers;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,17 +32,14 @@ public class FuncionarioController {
 
             Agencia agencia2= agencia.get();
 
-            String senhaEncode= new BCryptPasswordEncoder().encode(funcionarioRecord.senha());
-
             if (funcionarioRecord.login() == null || agencia.isPresent()!=true) {
                 return ResponseEntity.badRequest().build();
             } else {
                 Funcionario funcionario = new Funcionario(funcionarioRecord.cargRole(),
-                        funcionarioRecord.login(),
-                        senhaEncode,
                         agencia2,
                         funcionarioRecord.nome(),
                         funcionarioRecord.genero(),
+                        funcionarioRecord.cpf(),
                         funcionarioRecord.nascimento(),
                         funcionarioRecord.endereco(),
                         funcionarioRecord.telefone(),

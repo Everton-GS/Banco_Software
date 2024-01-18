@@ -7,6 +7,7 @@ public record FuncionarioRegistrarRecord(
         String login,
         String senha,
         String nome,
+        String cpf,
         AcessoRole cargRole,
         Long agencia,
         String genero,
