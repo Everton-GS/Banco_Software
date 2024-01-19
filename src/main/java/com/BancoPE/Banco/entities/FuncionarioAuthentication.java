@@ -14,13 +14,13 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Setter
 @Getter
-@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "funcionarioAcesso")
 public class FuncionarioAuthentication implements UserDetails {
@@ -29,7 +29,6 @@ public class FuncionarioAuthentication implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank
     @ManyToOne
     @JoinColumn(name = "id_funcionario")
     Funcionario funcionario;
@@ -40,6 +39,13 @@ public class FuncionarioAuthentication implements UserDetails {
     @NotBlank
     @Column(name = "senha")
     private String senha;
+    
+    public FuncionarioAuthentication(Funcionario funcionario,String login,
+            String senha) {
+        this.funcionario = funcionario;
+        this.login = login;
+        this.senha = senha;
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

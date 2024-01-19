@@ -27,15 +27,16 @@ public class InicializarAdminAplicacao implements CommandLineRunner {
         cadastrarFuncionarioMaster();
     }
     private void cadastrarAgencia() {
-        Optional<Agencia> agencia = agenciaRepository.findByAgencia("0001");
+        Optional<Agencia> agencia = agenciaRepository.findByAgenciaNumero("0001");
         if (agencia.isEmpty()) {
             Agencia agenciaCriar = new Agencia("0001", "Rua do Sol", "3897-3978");
             agenciaRepository.save(agenciaCriar);
         }
     }
     private void cadastrarFuncionarioMaster(){
-        Optional<Agencia> agencia = agenciaRepository.findByAgencia("0001");
-        if (funcionarioRepository.findByNome("Gerente_Master") == null && agencia.isPresent()) {
+        Optional<Agencia> agencia = agenciaRepository.findByAgenciaNumero("0001");
+        Optional<Funcionario> funcionario = funcionarioRepository.findBycpf("784.475.123-31");
+        if (funcionario.isEmpty()) {
             Funcionario funcionarioGerente = new Funcionario(AcessoRole.Gerente,agencia.get(),"784.475.123-31",
                     "Everton", GeneroRole.Masculino, LocalDate.of(2000, 04, 10), "Rua do sol", "4002-8922", "Banco@gmail.com");
             funcionarioRepository.save(funcionarioGerente);

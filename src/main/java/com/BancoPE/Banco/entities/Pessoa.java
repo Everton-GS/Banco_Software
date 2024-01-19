@@ -30,7 +30,7 @@ public abstract class Pessoa {
     @Column(name = "genero")
     GeneroRole generoRole;
 
-    @NotBlank
+   
     @JsonFormat(pattern = "dd-MM-yyyy", timezone = "UTC")
     @Column(name = "nascimento")
     private LocalDate nascimento;

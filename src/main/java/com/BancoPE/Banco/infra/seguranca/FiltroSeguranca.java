@@ -7,7 +7,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
-import com.BancoPE.Banco.repository.ClienteCartaoRepository;
+import com.BancoPE.Banco.repository.ClienteCartaoAuthenticationRepository;
 import com.BancoPE.Banco.repository.FuncionarioAuthenticationRepository;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -24,7 +24,7 @@ public class FiltroSeguranca extends OncePerRequestFilter {
 
 
     @Autowired
-    ClienteCartaoRepository cartaoRepository;
+    ClienteCartaoAuthenticationRepository cartaoRepository;
 
     @Autowired
     FuncionarioAuthenticationRepository funcionarioAuthenticationRepository;

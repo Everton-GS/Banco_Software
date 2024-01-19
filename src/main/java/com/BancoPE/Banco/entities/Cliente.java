@@ -24,13 +24,9 @@ public class Cliente extends Pessoa{
     @Column(name = "cargo")
     AcessoRole cargo;
 
-    public Cliente(Long id,String nome,String cpf,String genero,LocalDate nascimento,String endereco,String telefone,String email){
+    public Cliente(String nome,String cpf,GeneroRole genero,LocalDate nascimento,String endereco,String telefone,String email){
         super(nome,cpf,genero,nascimento,endereco,telefone,email);
-        this.id=id;
         
     }
-    
-   
-
     
 }

@@ -1,4 +1,5 @@
 package com.BancoPE.Banco.repository;
+import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -9,5 +10,5 @@ public interface FuncionarioRepository extends JpaRepository<Funcionario,Long> {
     
 
      @Query(value = "Select * from funcionario where cpf=:cpf",nativeQuery = true)
-     Funcionario findByNome(@Param("cpf") String cpf);
+     Optional<Funcionario> findBycpf(@Param("cpf") String cpf);
 }

@@ -4,14 +4,14 @@ import java.time.LocalDate;
 
 import com.BancoPE.Banco.entities.AcessoRole;
 import com.BancoPE.Banco.entities.ClienteCartaoAuthentication;
+import com.BancoPE.Banco.entities.GeneroRole;
 
 public record ClienteRegistrarRecord(
-        String login,
-        String senha,
         String nome,
+        String cpf,
         AcessoRole cargRole,
         ClienteCartaoAuthentication cartao,
-        String genero,
+        GeneroRole genero,
         LocalDate nascimento,
         String endereco,
         String telefone,

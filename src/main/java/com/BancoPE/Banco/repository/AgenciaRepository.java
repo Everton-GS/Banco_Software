@@ -14,5 +14,5 @@ public interface AgenciaRepository extends JpaRepository<Agencia,Long> {
     Optional<Agencia> findByAgencia(@Param("id") Long id );
     
      @Query(value = "Select * from agencia where agencia=:agencia",nativeQuery = true)
-     Optional<Agencia> findByAgencia(@Param("agencia") String agencia);
+     Optional<Agencia> findByAgenciaNumero(@Param("agencia") String agencia);
 } 
