@@ -1,6 +1,9 @@
 package com.BancoPE.Banco.entities;
 
 import java.time.LocalDate;
+
+import org.hibernate.validator.constraints.br.CPF;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.Column;
 import jakarta.persistence.MappedSuperclass;
@@ -23,6 +26,7 @@ public abstract class Pessoa {
     private String nome;
 
     @NotBlank
+    @CPF
     @Column(name = "cpf")
     private String cpf;
 

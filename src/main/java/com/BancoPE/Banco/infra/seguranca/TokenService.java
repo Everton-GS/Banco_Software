@@ -23,7 +23,7 @@ public class TokenService {
             Algorithm algorithm = Algorithm.HMAC512(secrete);
             String token = JWT.create()
                     .withIssuer("Banco_PE")
-                    .withSubject(cliente.getNumeroCartao())
+                    .withSubject(cliente.getUsername())
                     .withExpiresAt(TempoToken())
                     .sign(algorithm);
             return token;

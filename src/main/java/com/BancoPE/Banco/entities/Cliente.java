@@ -8,10 +8,12 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
+@NoArgsConstructor
 @Entity
 @Table(name = "cliente")
 public class Cliente extends Pessoa{
@@ -24,8 +26,9 @@ public class Cliente extends Pessoa{
     @Column(name = "cargo")
     AcessoRole cargo;
 
-    public Cliente(String nome,String cpf,GeneroRole genero,LocalDate nascimento,String endereco,String telefone,String email){
+    public Cliente(String nome,String cpf,GeneroRole genero,LocalDate nascimento,String endereco,String telefone,String email,AcessoRole cargo){
         super(nome,cpf,genero,nascimento,endereco,telefone,email);
+        this.cargo=cargo;
         
     }
     

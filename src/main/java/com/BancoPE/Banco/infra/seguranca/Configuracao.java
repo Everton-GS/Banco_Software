@@ -29,6 +29,8 @@ public class Configuracao {
             .authorizeHttpRequests(authorize -> authorize
                 .requestMatchers(HttpMethod.POST,"/agencia/cadastrar").permitAll()
                 .requestMatchers(HttpMethod.POST,"/gerente/registrar").permitAll()
+                .requestMatchers(HttpMethod.POST,"/aplicacao/acessar").permitAll()
+                .requestMatchers(HttpMethod.POST,"/cliente/registrar").permitAll()
                 .anyRequest().authenticated()
             )
             .httpBasic(Customizer.withDefaults())

@@ -1,13 +1,12 @@
 package com.BancoPE.Banco.entities;
 
 
+import java.time.LocalDate;
 import java.util.Collection;
-import java.util.Date;
 import java.util.List;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -18,7 +17,6 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -26,7 +24,6 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "cartao")
 public class ClienteCartaoAuthentication implements UserDetails {
@@ -41,7 +38,7 @@ public class ClienteCartaoAuthentication implements UserDetails {
     private String numeroCartao;
 
     @NotBlank
-    @Column(length = 6)
+    @Column(length = 255)
     private String senha;
     
     @ManyToOne
@@ -53,7 +50,17 @@ public class ClienteCartaoAuthentication implements UserDetails {
 
     @NotNull
     @Column(name = "vencimento")
-    private Date vencimento;
+    private LocalDate vencimento;
+
+    
+    public ClienteCartaoAuthentication(String numeroCartao,String senha, Cliente cliente,
+            double saldo, LocalDate vencimento) {
+        this.numeroCartao = numeroCartao;
+        this.senha = senha;
+        this.cliente = cliente;
+        this.saldo = saldo;
+        this.vencimento = vencimento;
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
