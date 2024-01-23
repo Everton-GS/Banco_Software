@@ -38,6 +38,7 @@ public class TokenService {
             String token= JWT.create()
                     .withIssuer("Banco_PE")
                     .withSubject(funcionario.getLogin())
+                    .withClaim("role",funcionario.getFuncionario().getCargo().funcaoRole())
                     .withExpiresAt(TempoToken())
                     .sign(algorithm);
                     return token;
@@ -61,6 +62,6 @@ public class TokenService {
     }
 
     private Instant TempoToken() {
-        return LocalDateTime.now().plusMinutes(5).toInstant(ZoneOffset.of("-03:00"));
+        return LocalDateTime.now().plusMinutes(30).toInstant(ZoneOffset.of("-03:00"));
     }
 }

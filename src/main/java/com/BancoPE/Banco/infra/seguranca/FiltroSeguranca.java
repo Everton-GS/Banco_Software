@@ -42,6 +42,8 @@ public class FiltroSeguranca extends OncePerRequestFilter {
                 SecurityContextHolder.getContext().setAuthentication(authentication);
             }else{
                UserDetails usuarioFuncionario = funcionarioAuthenticationRepository.findByLogin(login);
+               System.out.println(usuarioFuncionario.getAuthorities());
+               
                 var authentication = new UsernamePasswordAuthenticationToken(usuarioFuncionario,null,usuarioFuncionario.getAuthorities());
                 SecurityContextHolder.getContext().setAuthentication(authentication);
             }

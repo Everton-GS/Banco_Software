@@ -65,7 +65,7 @@ public class InicializarAdminAplicacao implements CommandLineRunner {
     private void cadastroCliente(){
         Optional<Agencia> agencia = agenciaRepository.findByAgenciaNumero("0001");
         Optional<Cliente> cliente= clienteRepository.findByCpf("137.329.610-01");
-        if(cliente.isEmpty() && agencia.isEmpty()){
+        if(cliente.isEmpty() && agencia.isPresent()){
             Cliente clienteN = new Cliente("Everton", "137.329.610-01", GeneroRole.Masculino, LocalDate.of(2000,04,10), "Rua 15", "4002-8922", "everton@gmail.com",AcessoRole.Cliente);
             clienteRepository.save(clienteN);
             LocalDate dataVencimento = LocalDate.now().plusYears(4);

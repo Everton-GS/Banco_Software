@@ -2,9 +2,9 @@ package com.BancoPE.Banco.entities;
 
 public enum AcessoRole {
     
-    Cliente("cliente"),
-    Atendente("atendente"),
-    Gerente("gerente");
+    Cliente("ROLE_cliente"),
+    Atendente("ROLE_atendente"),
+    Gerente("ROLE_gerente");
 
 
     private String role;
