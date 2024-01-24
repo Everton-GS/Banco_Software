@@ -25,7 +25,7 @@ public class AgenciaController {
 
 
     @Transactional(rollbackOn = Exception.class)
-    @PostMapping("/cadastrar")
+    @PostMapping("/registrar")
     public ResponseEntity<?> criar(@RequestBody AgenciaCadastrar agenciaCadastrar){
        try {
             Optional<Agencia> agencia = agenciaRepository.findByAgenciaNumero(agenciaCadastrar.numero());

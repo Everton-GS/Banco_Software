@@ -3,6 +3,7 @@ package com.BancoPE.Banco.controllers;
 
 import java.text.DecimalFormat;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -14,12 +15,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.BancoPE.Banco.entities.Cliente;
 import com.BancoPE.Banco.entities.ClienteCartaoAuthentication;
+import com.BancoPE.Banco.entities.ExtratoCartao;
 import com.BancoPE.Banco.record.ClienteRegistrarRecord;
 import com.BancoPE.Banco.record.ClienteTransferenciaValor;
 import com.BancoPE.Banco.repository.ClienteCartaoAuthenticationRepository;
 import com.BancoPE.Banco.repository.ClienteRepository;
 import com.BancoPE.Banco.services.ClienteCartaoService;
 import com.BancoPE.Banco.services.ClienteService;
+import com.BancoPE.Banco.services.ExtratoCartaoService;
+
 import jakarta.transaction.Transactional;
 
 @RestController
@@ -37,6 +41,9 @@ public class ClienteController {
 
     @Autowired
     ClienteCartaoService cartaoService;
+
+    @Autowired
+    ExtratoCartaoService extratoCartaoService;
 
     @Transactional(rollbackOn = Exception.class)
     @PostMapping("/registrar")
@@ -63,7 +70,7 @@ public class ClienteController {
                 String resultado =builder.toString();
                 LocalDate dataVencimento = LocalDate.now().plusYears(4);
 
-                String senha= new BCryptPasswordEncoder().encode("159357");
+                String senha= "$2a$10$aubbDVFqtagyoetqbbLc7uwTYnzKhgF8Hv.//BkOr9TRiWAelbIZO";
 
                 ClienteCartaoAuthentication clienteCartaoAuthentication = new ClienteCartaoAuthentication(resultado,senha, cliente, 0, dataVencimento);
                 cartaoService.registrar(clienteCartaoAuthentication);
@@ -88,6 +95,9 @@ public class ClienteController {
             }
             if(destinatario!=null&& cliente!=destinatario){
               cartaoService.transferenciaValor(transferenciaValor.valor(), cliente, destinatario);
+
+              ExtratoCartao extratoCartao = new ExtratoCartao(cliente, destinatario, transferenciaValor.valor());
+              extratoCartaoService.registrar(extratoCartao);
               return ResponseEntity.ok().build();
             }
             return ResponseEntity.badRequest().build();
@@ -95,9 +105,5 @@ public class ClienteController {
             return ResponseEntity.internalServerError().build();
         }
     }
-
-
-
-
 
 }

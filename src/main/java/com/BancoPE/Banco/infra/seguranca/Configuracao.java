@@ -33,6 +33,7 @@ public class Configuracao {
                 .requestMatchers(HttpMethod.POST,"/agencia/cadastrar").permitAll()
                 .requestMatchers(HttpMethod.POST,"/gerente/registrar").permitAll()
                 .requestMatchers(HttpMethod.POST,"/aplicacao/acessar").permitAll()
+                .requestMatchers(HttpMethod.POST,"/aplicacao/acessar/cliente").permitAll()
                 .requestMatchers(HttpMethod.POST,"/cliente/registrar").hasRole("gerente")
                 .requestMatchers(HttpMethod.POST,"/cliente/transferencia").hasRole("cliente")
                 .anyRequest().authenticated())

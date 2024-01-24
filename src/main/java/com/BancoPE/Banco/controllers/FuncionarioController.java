@@ -49,4 +49,6 @@ public class FuncionarioController {
             return ResponseEntity.internalServerError().build();
         }
     }
+
+    
 }
