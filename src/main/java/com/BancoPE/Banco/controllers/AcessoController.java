@@ -36,6 +36,7 @@ public class AcessoController {
     @Autowired
     TokenService tokenService;
 
+    
     @PostMapping(value = "/acessar/funcionario")
     public ResponseEntity<?> acessarAplicacaoCliente(@RequestBody AcessoAplicacaoRecord acessoLogin) {
         try {

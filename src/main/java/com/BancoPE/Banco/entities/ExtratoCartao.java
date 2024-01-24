@@ -1,6 +1,8 @@
 package com.BancoPE.Banco.entities;
 
 
+
+import java.time.LocalDateTime;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -29,6 +31,12 @@ public class ExtratoCartao {
 
     @Column(name = "destinatario")
     ClienteCartaoAuthentication destinatario;
+
+    @Column(name = "valor")
+    private double valor;
+
+    @Column(name = "horario")
+    private LocalDateTime horario;
 
 
 
