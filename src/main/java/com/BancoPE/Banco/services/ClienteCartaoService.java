@@ -1,13 +1,10 @@
 package com.BancoPE.Banco.services;
 
 import java.security.SecureRandom;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.BancoPE.Banco.entities.ClienteCartaoAuthentication;
 import com.BancoPE.Banco.repository.ClienteCartaoAuthenticationRepository;
-
 import lombok.NonNull;
 
 @Service

@@ -36,28 +36,39 @@ public class AcessoController {
     @Autowired
     TokenService tokenService;
 
-    @PostMapping(value = "/acessar")
-    public ResponseEntity<?> AcessarAplicacao(@RequestBody AcessoAplicacaoRecord acessoLogin) {
+    @PostMapping(value = "/acessar/funcionario")
+    public ResponseEntity<?> acessarAplicacaoCliente(@RequestBody AcessoAplicacaoRecord acessoLogin) {
         try {
             UserDetails userDetails = funcionarioAuthenticationRepository.findByLogin(acessoLogin.login());
-            if(userDetails!=null&& passwordEncoder.matches(acessoLogin.senha(),userDetails.getPassword())){
-                Authentication auth = new UsernamePasswordAuthenticationToken(userDetails,null,userDetails.getAuthorities());
+            if (userDetails != null && passwordEncoder.matches(acessoLogin.senha(), userDetails.getPassword())) {
+                Authentication auth = new UsernamePasswordAuthenticationToken(userDetails, null,
+                        userDetails.getAuthorities());
                 SecurityContextHolder.getContext().setAuthentication(auth);
                 String token = tokenService.gerarTokenFuncionario((FuncionarioAuthentication) auth.getPrincipal());
                 return ResponseEntity.ok(token);
-            }else{
-              UserDetails userDetails2= clienteCartaoAuthenticationRepository.findByCartao(acessoLogin.login());
-              if(userDetails2!=null && passwordEncoder.matches(acessoLogin.senha(), userDetails2.getPassword())){
-                Authentication auth2= new UsernamePasswordAuthenticationToken(userDetails2,null, userDetails2.getAuthorities());
-                SecurityContextHolder.getContext().setAuthentication(auth2);
-                String token=tokenService.gerarTokenCliente((ClienteCartaoAuthentication)auth2.getPrincipal());
-                return ResponseEntity.ok(token);
-              }
+            } else {
                 return ResponseEntity.badRequest().build();
             }
         } catch (AuthenticationException e) {
             return ResponseEntity.internalServerError().build();
         }
+    }
 
+    @PostMapping("/acessar/cliente")
+    public ResponseEntity<?> acessarAplicacaoFuncionario(@RequestBody AcessoAplicacaoRecord acessoLogin) {
+        try {
+            UserDetails userDetails2 = clienteCartaoAuthenticationRepository.findByCartao(acessoLogin.login());
+            if (userDetails2 != null && passwordEncoder.matches(acessoLogin.senha(), userDetails2.getPassword())) {
+                Authentication auth2 = new UsernamePasswordAuthenticationToken(userDetails2, null,
+                        userDetails2.getAuthorities());
+                SecurityContextHolder.getContext().setAuthentication(auth2);
+                String token = tokenService.gerarTokenCliente((ClienteCartaoAuthentication) auth2.getPrincipal());
+                return ResponseEntity.ok(token);
+            } else {
+                return ResponseEntity.badRequest().build();
+            }
+        } catch (Exception e) {
+            return ResponseEntity.internalServerError().build();
+        }
     }
 }

@@ -13,6 +13,8 @@ import com.BancoPE.Banco.repository.AgenciaRepository;
 import com.BancoPE.Banco.services.FuncionarioAuthenticationService;
 import com.BancoPE.Banco.services.FuncionarioService;
 
+import jakarta.transaction.Transactional;
+
 @RestController
 @RequestMapping(value = "/gerente")
 public class FuncionarioController {
@@ -26,6 +28,7 @@ public class FuncionarioController {
     @Autowired
     AgenciaRepository agenciaRepository;
 
+    @Transactional(rollbackOn = Exception.class)
     @PostMapping("/funcionario/registrar")
     public ResponseEntity<?> registrar(@RequestBody FuncionarioRegistrarRecord funcionarioRecord) {
         try {

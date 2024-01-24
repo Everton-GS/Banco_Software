@@ -20,6 +20,7 @@ import com.BancoPE.Banco.repository.ClienteCartaoAuthenticationRepository;
 import com.BancoPE.Banco.repository.ClienteRepository;
 import com.BancoPE.Banco.services.ClienteCartaoService;
 import com.BancoPE.Banco.services.ClienteService;
+import jakarta.transaction.Transactional;
 
 @RestController
 @RequestMapping(value = "/cliente")
@@ -37,6 +38,7 @@ public class ClienteController {
     @Autowired
     ClienteCartaoService cartaoService;
 
+    @Transactional(rollbackOn = Exception.class)
     @PostMapping("/registrar")
     public ResponseEntity<?>registrar(@RequestBody ClienteRegistrarRecord clienteRegistrar){
        try{
@@ -74,6 +76,7 @@ public class ClienteController {
        }    
     }
 
+    @Transactional(rollbackOn = Exception.class)
     @PostMapping("/transferencia")
     public ResponseEntity<?> transferenciaValor(@RequestBody ClienteTransferenciaValor transferenciaValor){
         try {
