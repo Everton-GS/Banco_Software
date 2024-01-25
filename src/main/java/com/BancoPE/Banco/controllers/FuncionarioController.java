@@ -52,7 +52,6 @@ public class FuncionarioController {
     public ResponseEntity<?> registrar(@RequestBody FuncionarioRegistrarRecord funcionarioRecord) {
         try {
             Funcionario funcionarioGerente= (Funcionario) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-            
             if (funcionarioGerente.getAgencia()!=null) {
                 Funcionario funcionario = new Funcionario(funcionarioRecord.cargo(),funcionarioGerente.getAgencia(),funcionarioRecord.cpf(),funcionarioRecord.nome(),funcionarioRecord.genero(),  funcionarioRecord.nascimento(),funcionarioRecord.endereco(),funcionarioRecord.telefone(), funcionarioRecord.email());
                 funcionarioService.registrar(funcionario);
@@ -92,7 +91,7 @@ public class FuncionarioController {
             try {
                 Optional<ExtratoCartao> extratoCartao = extratoCartaoRepository.findByID(cancelamentoTransferencia.id());
                 if(extratoCartao.isPresent()){
-                    extratoCartaoService.extornarValor(extratoCartao.get(),extratoCartao.get().getRemetente(), extratoCartao.get().getDestinatario(),extratoCartao.get().getValor());
+                    extratoCartaoService.estornarValor(extratoCartao.get(),extratoCartao.get().getRemetente(), extratoCartao.get().getDestinatario(),extratoCartao.get().getValor());
                     return ResponseEntity.ok().build();
                 }else{
                     return ResponseEntity.badRequest().build();

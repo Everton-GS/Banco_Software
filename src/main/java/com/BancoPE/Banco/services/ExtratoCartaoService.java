@@ -24,7 +24,7 @@ public class ExtratoCartaoService {
             cartaoRepository.save(extratoCartao);
     }
 
-    public void extornarValor(@NonNull ExtratoCartao extratoCartao, ClienteCartaoAuthentication remetente,ClienteCartaoAuthentication destinatario,double valor){
+    public void estornarValor(@NonNull ExtratoCartao extratoCartao, ClienteCartaoAuthentication remetente,ClienteCartaoAuthentication destinatario,double valor){
             double valorAtualizado=remetente.getSaldo()+valor;
             remetente.setSaldo(valorAtualizado);
             clienteCartaoAuthentication.save(remetente);
