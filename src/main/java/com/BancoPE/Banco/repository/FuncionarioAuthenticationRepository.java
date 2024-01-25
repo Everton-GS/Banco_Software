@@ -9,6 +9,6 @@ import com.BancoPE.Banco.entities.FuncionarioAuthentication;
 public interface FuncionarioAuthenticationRepository extends JpaRepository<FuncionarioAuthentication,Long> {
     
 
-    @Query(name = "Select * from funcionarioAcesso where login =:login")
+    @Query(value = "Select * from funcionario_acesso where login =:login",nativeQuery = true)
     FuncionarioAuthentication findByLogin(@Param("login")String login);
 }

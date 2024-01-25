@@ -35,6 +35,9 @@ public class ExtratoCartao {
     @JoinColumn(name = "destinatario_id")
     private ClienteCartaoAuthentication destinatario;
 
+    @Column(name = "transacao")
+    StatusTransferenciaRole statusTransferenciaRole;
+
     @NotNull
     @Column(name = "valor")
     private double valor;
@@ -48,8 +51,9 @@ public class ExtratoCartao {
         this.remetente = remetente;
         this.destinatario = destinatario;
         this.valor = valor;
-       
-         LocalDateTime now = LocalDateTime.now();
+        this.statusTransferenciaRole=StatusTransferenciaRole.APROVADO;
+
+        LocalDateTime now = LocalDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         this.horario = now.format(formatter);
     }

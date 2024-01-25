@@ -1,4 +1,6 @@
 package com.BancoPE.Banco.controllers;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -9,12 +11,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.BancoPE.Banco.entities.ClienteCartaoAuthentication;
+import com.BancoPE.Banco.entities.ExtratoCartao;
 import com.BancoPE.Banco.entities.Funcionario;
 import com.BancoPE.Banco.entities.FuncionarioAuthentication;
 import com.BancoPE.Banco.record.BloquearContaRecord;
+import com.BancoPE.Banco.record.CancelamentoTransferencia;
 import com.BancoPE.Banco.record.FuncionarioRegistrarRecord;
 import com.BancoPE.Banco.repository.AgenciaRepository;
 import com.BancoPE.Banco.repository.ClienteCartaoAuthenticationRepository;
+import com.BancoPE.Banco.repository.ExtratoCartaoRepository;
+import com.BancoPE.Banco.services.ExtratoCartaoService;
 import com.BancoPE.Banco.services.FuncionarioAuthenticationService;
 import com.BancoPE.Banco.services.FuncionarioService;
 import jakarta.transaction.Transactional;
@@ -34,6 +40,12 @@ public class FuncionarioController {
 
     @Autowired
     AgenciaRepository agenciaRepository;
+
+    @Autowired
+    ExtratoCartaoRepository extratoCartaoRepository;
+
+    @Autowired
+    ExtratoCartaoService extratoCartaoService;
 
     @Transactional(rollbackOn = Exception.class)
     @PostMapping("/funcionario/registrar")
@@ -58,7 +70,7 @@ public class FuncionarioController {
     }
     @Transactional(rollbackOn = Exception.class)
     @PutMapping("/bloquear")
-    public ResponseEntity<?> bloqueioConta(@RequestBody BloquearContaRecord bloquear ){
+    public ResponseEntity<?> bloquearConta(@RequestBody BloquearContaRecord bloquear ){
         try {
             ClienteCartaoAuthentication clienteCartaoAuthentication= authenticationRepository.findByCartao(bloquear.cartao());
 
@@ -72,6 +84,22 @@ public class FuncionarioController {
         } catch (Exception e) {
             return ResponseEntity.internalServerError().build();
         }
+    }
+
+    @Transactional(rollbackOn = Exception.class)
+    @PutMapping("/estorno")
+    public ResponseEntity<?> cancelarTransferencia(@RequestBody CancelamentoTransferencia cancelamentoTransferencia ){
+            try {
+                Optional<ExtratoCartao> extratoCartao = extratoCartaoRepository.findByID(cancelamentoTransferencia.id());
+                if(extratoCartao.isPresent()){
+                    extratoCartaoService.extornarValor(extratoCartao.get(),extratoCartao.get().getRemetente(), extratoCartao.get().getDestinatario(),extratoCartao.get().getValor());
+                    return ResponseEntity.ok().build();
+                }else{
+                    return ResponseEntity.badRequest().build();
+                }
+            } catch (Exception e) {
+                return ResponseEntity.internalServerError().build();
+            }
     }
 
     
