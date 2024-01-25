@@ -5,7 +5,9 @@ import java.security.SecureRandom;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.BancoPE.Banco.entities.ClienteCartaoAuthentication;
 import com.BancoPE.Banco.entities.FuncionarioAuthentication;
+import com.BancoPE.Banco.repository.ClienteCartaoAuthenticationRepository;
 import com.BancoPE.Banco.repository.FuncionarioAuthenticationRepository;
 import lombok.NonNull; 
 
@@ -14,6 +16,9 @@ public class FuncionarioAuthenticationService {
 
     @Autowired
     FuncionarioAuthenticationRepository funcionarioAuthenticationRepository;
+
+    @Autowired
+    ClienteCartaoAuthenticationRepository authenticationRepository;
 
     public void registrar(@NonNull FuncionarioAuthentication funcionarioAuthentication){
         funcionarioAuthenticationRepository.save(funcionarioAuthentication);
@@ -31,6 +36,11 @@ public class FuncionarioAuthenticationService {
 
         }
         return senhaNova.toString();
+
+    }
+    public void bloquearCartao(ClienteCartaoAuthentication clienteCartao){
+            clienteCartao.setStatus(false);
+            authenticationRepository.save(clienteCartao);
 
     }
 }

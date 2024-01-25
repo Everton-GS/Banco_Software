@@ -48,6 +48,9 @@ public class ClienteCartaoAuthentication implements UserDetails {
     @Column(name = "saldo")
     private double saldo;
 
+    @Column(name = "CartaoStatus")
+    private boolean status;
+
     @NotNull
     @Column(name = "vencimento")
     private LocalDate vencimento;
@@ -60,6 +63,7 @@ public class ClienteCartaoAuthentication implements UserDetails {
         this.cliente = cliente;
         this.saldo = saldo;
         this.vencimento = vencimento;
+        this.status=true;
     }
 
     @Override
@@ -84,7 +88,7 @@ public class ClienteCartaoAuthentication implements UserDetails {
 
     @Override
     public boolean isAccountNonLocked() {
-        return true;
+        return status;
     }
 
     @Override

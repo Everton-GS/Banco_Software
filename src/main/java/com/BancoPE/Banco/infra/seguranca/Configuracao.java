@@ -32,8 +32,10 @@ public class Configuracao {
             .authorizeHttpRequests(authorize -> authorize
                 .requestMatchers(HttpMethod.POST,"/agencia/cadastrar").permitAll()
                 .requestMatchers(HttpMethod.POST,"/gerente/registrar").permitAll()
+                .requestMatchers(HttpMethod.PUT,"/gerente/bloquear").hasRole("gerente")
                 .requestMatchers(HttpMethod.POST,"/aplicacao/acessar").permitAll()
                 .requestMatchers(HttpMethod.POST,"/aplicacao/acessar/cliente").permitAll()
+                .requestMatchers(HttpMethod.POST,"/aplicacao/acessar/funcionario").permitAll()
                 .requestMatchers(HttpMethod.POST,"/cliente/registrar").hasRole("gerente")
                 .requestMatchers(HttpMethod.POST,"/cliente/transferencia").hasRole("cliente")
                 .anyRequest().authenticated())

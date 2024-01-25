@@ -59,7 +59,7 @@ public class AcessoController {
     public ResponseEntity<?> acessarAplicacaoFuncionario(@RequestBody AcessoAplicacaoRecord acessoLogin) {
         try {
             UserDetails userDetails2 = clienteCartaoAuthenticationRepository.findByCartao(acessoLogin.login());
-            if (userDetails2 != null && passwordEncoder.matches(acessoLogin.senha(), userDetails2.getPassword())) {
+            if (userDetails2 != null &&userDetails2.isAccountNonLocked()==true && passwordEncoder.matches(acessoLogin.senha(), userDetails2.getPassword())) {
                 Authentication auth2 = new UsernamePasswordAuthenticationToken(userDetails2, null,
                         userDetails2.getAuthorities());
                 SecurityContextHolder.getContext().setAuthentication(auth2);

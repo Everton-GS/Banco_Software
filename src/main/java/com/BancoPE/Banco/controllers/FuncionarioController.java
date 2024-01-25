@@ -3,16 +3,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.BancoPE.Banco.entities.ClienteCartaoAuthentication;
 import com.BancoPE.Banco.entities.Funcionario;
 import com.BancoPE.Banco.entities.FuncionarioAuthentication;
+import com.BancoPE.Banco.record.BloquearContaRecord;
 import com.BancoPE.Banco.record.FuncionarioRegistrarRecord;
 import com.BancoPE.Banco.repository.AgenciaRepository;
+import com.BancoPE.Banco.repository.ClienteCartaoAuthenticationRepository;
 import com.BancoPE.Banco.services.FuncionarioAuthenticationService;
 import com.BancoPE.Banco.services.FuncionarioService;
-
 import jakarta.transaction.Transactional;
 
 @RestController
@@ -24,6 +28,9 @@ public class FuncionarioController {
 
     @Autowired
     FuncionarioAuthenticationService funcionarioAuthenticationService;
+
+    @Autowired
+    ClienteCartaoAuthenticationRepository authenticationRepository;
 
     @Autowired
     AgenciaRepository agenciaRepository;
@@ -46,6 +53,23 @@ public class FuncionarioController {
             }
         } catch (Exception e) {
             e.printStackTrace();
+            return ResponseEntity.internalServerError().build();
+        }
+    }
+    @Transactional(rollbackOn = Exception.class)
+    @PutMapping("/bloquear")
+    public ResponseEntity<?> bloqueioConta(@RequestBody BloquearContaRecord bloquear ){
+        try {
+            ClienteCartaoAuthentication clienteCartaoAuthentication= authenticationRepository.findByCartao(bloquear.cartao());
+
+            if(clienteCartaoAuthentication!=null){
+                clienteCartaoAuthentication.setStatus(false);
+                funcionarioAuthenticationService.bloquearCartao(clienteCartaoAuthentication);
+                return ResponseEntity.ok().build();
+            }else{
+                return ResponseEntity.badRequest().build();
+            }
+        } catch (Exception e) {
             return ResponseEntity.internalServerError().build();
         }
     }

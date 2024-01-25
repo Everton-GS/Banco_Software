@@ -3,12 +3,10 @@ package com.BancoPE.Banco.controllers;
 
 import java.text.DecimalFormat;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,7 +21,6 @@ import com.BancoPE.Banco.repository.ClienteRepository;
 import com.BancoPE.Banco.services.ClienteCartaoService;
 import com.BancoPE.Banco.services.ClienteService;
 import com.BancoPE.Banco.services.ExtratoCartaoService;
-
 import jakarta.transaction.Transactional;
 
 @RestController
