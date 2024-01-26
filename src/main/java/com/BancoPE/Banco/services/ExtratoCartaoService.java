@@ -1,5 +1,6 @@
 package com.BancoPE.Banco.services;
 
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -34,5 +35,9 @@ public class ExtratoCartaoService {
             clienteCartaoAuthentication.save(destinatario);
            extratoCartao.setStatusTransferenciaRole(StatusTransferenciaRole.ESTORNO);
             
+    }
+
+    public List<ExtratoCartao> listarExtrato(Long id){
+        return cartaoRepository.findByall(id);
     }
 }

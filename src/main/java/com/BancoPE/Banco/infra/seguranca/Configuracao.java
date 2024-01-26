@@ -39,6 +39,7 @@ public class Configuracao {
                 .requestMatchers(HttpMethod.POST,"/aplicacao/acessar/funcionario").permitAll()
                 .requestMatchers(HttpMethod.POST,"/cliente/registrar").hasRole("gerente")
                 .requestMatchers(HttpMethod.POST,"/cliente/transferencia").hasRole("cliente")
+                .requestMatchers(HttpMethod.POST,"/cliente/extrato/listar").hasRole("cliente")
                 .anyRequest().authenticated())
                 .addFilterBefore(filtroSeguranca,UsernamePasswordAuthenticationFilter.class)
             .httpBasic(Customizer.withDefaults())

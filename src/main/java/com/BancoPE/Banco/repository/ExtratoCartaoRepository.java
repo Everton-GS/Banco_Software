@@ -1,5 +1,6 @@
 package com.BancoPE.Banco.repository;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -14,5 +15,7 @@ public interface ExtratoCartaoRepository extends JpaRepository<ExtratoCartao,Lon
     Optional<ExtratoCartao> findByID(@Param("id") long id);
  
 
+    @Query(value = "SELECT * FROM extrato WHERE destinatario_id = :id or remetente_id = :id", nativeQuery = true)
+    List<ExtratoCartao> findByall(@Param("id") Long id);
 
 }
