@@ -36,7 +36,6 @@ public class ExtratoCartaoService {
            extratoCartao.setStatusTransferenciaRole(StatusTransferenciaRole.ESTORNO);
             
     }
-
     public List<ExtratoCartao> listarExtrato(Long id){
         return cartaoRepository.findByall(id);
     }

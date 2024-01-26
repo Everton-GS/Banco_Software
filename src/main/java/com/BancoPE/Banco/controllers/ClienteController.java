@@ -101,7 +101,6 @@ public class ClienteController {
             }
             if (destinatario != null && cliente != destinatario) {
                 cartaoService.transferenciaValor(transferenciaValor.valor(), cliente, destinatario);
-
                 ExtratoCartao extratoCartao = new ExtratoCartao(cliente, destinatario, transferenciaValor.valor());
                 extratoCartaoService.registrar(extratoCartao);
                 return ResponseEntity.ok().build();

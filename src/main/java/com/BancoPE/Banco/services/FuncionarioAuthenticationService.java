@@ -36,11 +36,19 @@ public class FuncionarioAuthenticationService {
 
         }
         return senhaNova.toString();
-
     }
+
+
     public void bloquearCartao(ClienteCartaoAuthentication clienteCartao){
             clienteCartao.setStatus(false);
             authenticationRepository.save(clienteCartao);
-
     }
+
+    public void depositarCartao(ClienteCartaoAuthentication cartaoAuthentication,double valor){
+            double atualizarValor=cartaoAuthentication.getSaldo()+valor;
+            cartaoAuthentication.setSaldo(atualizarValor);
+            authenticationRepository.save(cartaoAuthentication);
+    }
+
+    
 }

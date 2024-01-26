@@ -34,6 +34,7 @@ public class Configuracao {
                 .requestMatchers(HttpMethod.POST,"/gerente/registrar").permitAll()
                 .requestMatchers(HttpMethod.PUT,"/gerente/bloquear").hasRole("gerente")
                 .requestMatchers(HttpMethod.PUT,"/gerente/estorno").hasRole("gerente")
+                .requestMatchers(HttpMethod.PUT,"/gerente/deposito").hasRole("gerente")
                 .requestMatchers(HttpMethod.POST,"/aplicacao/acessar").permitAll()
                 .requestMatchers(HttpMethod.POST,"/aplicacao/acessar/cliente").permitAll()
                 .requestMatchers(HttpMethod.POST,"/aplicacao/acessar/funcionario").permitAll()

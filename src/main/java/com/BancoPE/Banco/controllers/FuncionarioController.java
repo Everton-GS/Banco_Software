@@ -14,6 +14,7 @@ import com.BancoPE.Banco.entities.Funcionario;
 import com.BancoPE.Banco.entities.FuncionarioAuthentication;
 import com.BancoPE.Banco.record.BloquearContaRecord;
 import com.BancoPE.Banco.record.CancelamentoTransferencia;
+import com.BancoPE.Banco.record.DepositoContaRecord;
 import com.BancoPE.Banco.record.FuncionarioRegistrarRecord;
 import com.BancoPE.Banco.repository.AgenciaRepository;
 import com.BancoPE.Banco.repository.ClienteCartaoAuthenticationRepository;
@@ -66,7 +67,7 @@ public class FuncionarioController {
         }
     }
     @Transactional(rollbackOn = Exception.class)
-    @PutMapping("/bloquear")
+    @PutMapping("/bloquear/cartao")
     public ResponseEntity<?> bloquearConta(@RequestBody BloquearContaRecord bloquear ){
         try {
             ClienteCartaoAuthentication clienteCartaoAuthentication= authenticationRepository.findByCartao(bloquear.cartao());
@@ -97,7 +98,22 @@ public class FuncionarioController {
             } catch (Exception e) {
                 return ResponseEntity.internalServerError().build();
             }
-    }
+     }
+     @Transactional(rollbackOn = Exception.class)
+     @PutMapping("/deposito")
+     public ResponseEntity<?> depositarCartao(@RequestBody DepositoContaRecord depositoContaRecord ){
+        try {
+             ClienteCartaoAuthentication cartao = authenticationRepository.findByCartao(depositoContaRecord.cartao());
+             if(cartao!=null && depositoContaRecord.valor()>0){
+                funcionarioAuthenticationService.depositarCartao(cartao, depositoContaRecord.valor());
+                return ResponseEntity.ok().build();
+             }else{
+                return ResponseEntity.badRequest().build();
+             }   
+        } catch (Exception e) {
+            return ResponseEntity.internalServerError().build();
+        }
+     }
 
     
 }
