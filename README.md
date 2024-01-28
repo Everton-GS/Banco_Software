@@ -25,6 +25,12 @@ O sistema utiliza a configuração do Spring Security, onde podemos realizar a a
 ## Credencias de acesso 📧
 O sistema utiliza uma API chamada JavaMailsend, desenvolvida pela Oracle, para enviar e-mails. Esta API oferece recursos robustos para enviar e-mails em aplicações Java. O sistema de envio de e-mail foi implementado para comunicar as credenciais de acesso da aplicação.
 
+```
+Obs:É necessário configurar o application.properties para conseguir enviar email.
+
+Configuração de envio de e-mail:spring.mail.username=
+                                spring.mail.password=
+```
 ## Contenização da aplicação 🐳
 O sistema foi containerizado utilizando o Docker com o objetivo de tornar mais fácil para outros desenvolvedores utilizarem e evitarem conflitos de ambiente. Os programas containerizados incluem um banco de dados MySQL para armazenamento de dados e o phpMyAdmin para gerenciamento do banco de dados.
 
