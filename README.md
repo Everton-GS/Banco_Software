@@ -3,15 +3,18 @@
 ## 📚Informação👨‍🏫👩‍🎓
 O projeto foi concebido com intuinto de similar as operações dentro de um sistema de Banco. Atráves desse sistema, foi desenvolvido funcionalidades como transferência,deposito,estorno,extrato de conta, bloqueio de conta.
 
-Funcionalidade do Usuário
-Transferência de conta.
-extrato da conta.
+<h3>Funcionalidade do Usuário<br> </h3>   
+ 
++ Transferência de conta<br>
++ extrato da conta<br>
 
-Funcionalidade do Gerente
-Criação de conta funcionário
-Deposito em conta
-Bloquei de cartão
-Estorno de pagamento
+<h3>Funcionalidade do Gerente<br></h3>
+
++ Criação de conta funcionário<br>
++ Criação de conta Cliente<br>
++ Deposito em conta<br>
++ Bloquei de cartão<br>
++ Estorno de pagamento<br>
 
 ## Arquitetura Software💻
 O projeto foi desenvolvido no padrão MVC (Model-View-Controller) é uma arquitetura de software que divide uma aplicação em três componentes principais para melhorar a organização e a manutenção do código
