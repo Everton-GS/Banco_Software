@@ -3,7 +3,7 @@ package com.BancoPE.Banco.entities;
 public enum StatusTransferenciaRole {
     
     APROVADO("Aprovado"),
-    ESTORNO("Estrono");
+    ESTORNO("Estorno");
 
     String status;
 

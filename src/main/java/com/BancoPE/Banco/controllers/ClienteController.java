@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -24,6 +25,7 @@ import com.BancoPE.Banco.repository.ClienteCartaoAuthenticationRepository;
 import com.BancoPE.Banco.repository.ClienteRepository;
 import com.BancoPE.Banco.services.ClienteCartaoService;
 import com.BancoPE.Banco.services.ClienteService;
+import com.BancoPE.Banco.services.EmailService;
 import com.BancoPE.Banco.services.ExtratoCartaoService;
 import jakarta.transaction.Transactional;
 
@@ -36,6 +38,9 @@ public class ClienteController {
 
     @Autowired
     ClienteRepository clienteRepository;
+
+    @Autowired
+    EmailService emailService;
 
     @Autowired
     ClienteCartaoAuthenticationRepository cartaoAuthenticationRepository;
@@ -73,10 +78,12 @@ public class ClienteController {
                 String resultado = builder.toString();
                 LocalDate dataVencimento = LocalDate.now().plusYears(4);
 
-                String senha = "$2a$10$aubbDVFqtagyoetqbbLc7uwTYnzKhgF8Hv.//BkOr9TRiWAelbIZO";
+                String senha = cartaoService.gerarSenha();
+                String senhaCriptografada= new BCryptPasswordEncoder().encode(senha);
 
+                emailService.emailAcesso(clienteRegistrar.cpf(),clienteRegistrar.email(), senha);
                 ClienteCartaoAuthentication clienteCartaoAuthentication = new ClienteCartaoAuthentication(resultado,
-                        senha, cliente, 0, dataVencimento);
+                        senhaCriptografada, cliente, 0, dataVencimento);
                 cartaoService.registrar(clienteCartaoAuthentication);
                 return ResponseEntity.ok().build();
             } else {

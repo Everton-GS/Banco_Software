@@ -56,7 +56,7 @@ public class InicializarAdminAplicacao implements CommandLineRunner {
             Funcionario funcionarioGerente = new Funcionario(AcessoRole.Gerente,agencia.get(),"692.812.590-01",
                     "Everton", GeneroRole.Masculino, LocalDate.of(2000, 04, 10), "Rua do sol", "4002-8922", "Banco@gmail.com");
             funcionarioRepository.save(funcionarioGerente);
-            String senha="$2a$10$.Lu6FVbCB8btR8Wpeiyjo.HY/3I2lyb/NGaweKQSknR0RLharTNsC";
+            String senha="$2a$10$Z3GkPMfz/L9eA185.ewYLOPEXEi7oty3Oh9L7XmtEjQ4znPuRSV/u";
 
             FuncionarioAuthentication funcionarioAuthentication = new FuncionarioAuthentication(funcionarioGerente,"692.812.590-01" , senha);
             authenticationService.registrar(funcionarioAuthentication);
@@ -69,7 +69,7 @@ public class InicializarAdminAplicacao implements CommandLineRunner {
             Cliente clienteN = new Cliente("Everton", "137.329.610-01", GeneroRole.Masculino, LocalDate.of(2000,04,10), "Rua 15", "4002-8922", "everton@gmail.com",AcessoRole.Cliente);
             clienteRepository.save(clienteN);
             LocalDate dataVencimento = LocalDate.now().plusYears(4);
-            String senha ="$2a$10$fl2CYgbw/xqEe/qPhkpTpuPydU5Svvaljflt51zEsGSEL6nt7A7de";
+            String senha ="$2a$10$7k70O20wMJSzRRpelfhUc.Vsimgqhb672r9d3mJkchRO7eGtAhrL6";
             ClienteCartaoAuthentication cartaoAuthentication = new ClienteCartaoAuthentication("0001-000001",senha,clienteN,0,dataVencimento);
             cartaoAuthenticationRepository.save(cartaoAuthentication);
 

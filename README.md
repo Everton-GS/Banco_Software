@@ -28,6 +28,24 @@ O sistema utiliza uma API chamada JavaMailsend, desenvolvida pela Oracle, para e
 ## Contenização da aplicação 🐳
 O sistema foi containerizado utilizando o Docker com o objetivo de tornar mais fácil para outros desenvolvedores utilizarem e evitarem conflitos de ambiente. Os programas containerizados incluem um banco de dados MySQL para armazenamento de dados e o phpMyAdmin para gerenciamento do banco de dados.
 
+## Inicialização aplicação
+```
+ docker-composer up --build -d
+```
+```
+O sistema starta Usuário e Funcionário automaticamente.
+
+Obs:A senha dentro do código é encryptada, para a seguranaça da aplicação
+```
+```
+Acesso Gerente:692.812.590-01
+         Senha:Japão
+```
+```
+Acesso Cliente:0001-000001
+         Senha:Espanha
+```
+
 ## Tecnologia🛠️
 - Java 17
 - Springboot

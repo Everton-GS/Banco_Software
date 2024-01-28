@@ -20,23 +20,25 @@ public class ExtratoCartaoService {
     @Autowired
     ClienteCartaoAuthenticationRepository clienteCartaoAuthentication;
 
-    
-    public void registrar(@NonNull ExtratoCartao extratoCartao ){
-            cartaoRepository.save(extratoCartao);
+    public void registrar(@NonNull ExtratoCartao extratoCartao) {
+        cartaoRepository.save(extratoCartao);
     }
 
-    public void estornarValor(@NonNull ExtratoCartao extratoCartao, ClienteCartaoAuthentication remetente,ClienteCartaoAuthentication destinatario,double valor){
-            double valorAtualizado=remetente.getSaldo()+valor;
+    public void estornarValor(@NonNull ExtratoCartao extratoCartao, ClienteCartaoAuthentication remetente,
+            ClienteCartaoAuthentication destinatario, double valor) {
+        if (extratoCartao.getStatusTransferenciaRole() == StatusTransferenciaRole.APROVADO) {
+            double valorAtualizado = remetente.getSaldo() + valor;
             remetente.setSaldo(valorAtualizado);
             clienteCartaoAuthentication.save(remetente);
 
-            double valorAtualizarDestinatario=destinatario.getSaldo()-valor;
+            double valorAtualizarDestinatario = destinatario.getSaldo() - valor;
             destinatario.setSaldo(valorAtualizarDestinatario);
             clienteCartaoAuthentication.save(destinatario);
-           extratoCartao.setStatusTransferenciaRole(StatusTransferenciaRole.ESTORNO);
-            
+            extratoCartao.setStatusTransferenciaRole(StatusTransferenciaRole.ESTORNO);
+        }
     }
-    public List<ExtratoCartao> listarExtrato(Long id){
+
+    public List<ExtratoCartao> listarExtrato(Long id) {
         return cartaoRepository.findByall(id);
     }
 }
