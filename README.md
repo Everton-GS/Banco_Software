@@ -44,12 +44,14 @@ O sistema starta Usuário e Funcionário automaticamente.
 Obs:A senha dentro do código é encryptada para a seguranaça da aplicação
 ```
 ```
-Acesso Gerente:692.812.590-01
-         Senha:Japão
+Acesso Gerente:
+         login:692.812.590-01
+         senha:Japão
 ```
 ```
-Acesso Cliente:0001-000001
-         Senha:Espanha
+Acesso Cliente:
+         login:0001-000001
+         senha:Espanha
 ```
 
 ## Tecnologia🛠️
