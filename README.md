@@ -26,7 +26,7 @@ O sistema utiliza a configuração do Spring Security, onde podemos realizar a a
 O sistema utiliza uma API chamada JavaMailsend, desenvolvida pela Oracle, para enviar e-mails. Esta API oferece recursos robustos para enviar e-mails em aplicações Java. O sistema de envio de e-mail foi implementado para comunicar as credenciais de acesso da aplicação.
 
 ```
-Obs:É necessário configurar o application.properties para conseguir enviar email.
+Obs: É necessário configurar o arquivo application.properties para conseguir enviar e-mails
 
 Configuração de envio de e-mail:spring.mail.username=
                                 spring.mail.password=
