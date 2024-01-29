@@ -11,7 +11,7 @@ O projeto foi concebido com intuinto de similar as operações dentro de um sist
 <h3>Funcionalidade do Gerente<br></h3>
 
 + Criação de conta funcionário<br>
-+ Criação de conta Cliente<br>
++ Criação de conta cliente<br>
 + Deposito em conta<br>
 + Bloquear cartão do cliente<br>
 + Estorno de pagamento realizado<br>
