@@ -56,6 +56,14 @@ login:0001-000001
 senha:Espanha
 ```
 
+## Acesso ao SGBD
+```
+Rota:http://localhost:8000/
+
+login:root
+senha:bp1234
+```
+
 ## Tecnologia🛠️
 - Java 17
 - Springboot
