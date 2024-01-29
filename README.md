@@ -13,8 +13,8 @@ O projeto foi concebido com intuinto de similar as operações dentro de um sist
 + Criação de conta funcionário<br>
 + Criação de conta Cliente<br>
 + Deposito em conta<br>
-+ Bloquei de cartão<br>
-+ Estorno de pagamento<br>
++ Bloquear cartão do cliente<br>
++ Estorno de pagamento realizado<br>
 
 ## Arquitetura Software💻
 O projeto foi desenvolvido no padrão MVC (Model-View-Controller) é uma arquitetura de software que divide uma aplicação em três componentes principais para melhorar a organização e a manutenção do código
