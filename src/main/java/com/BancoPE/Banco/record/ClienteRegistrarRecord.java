@@ -9,7 +9,7 @@ import com.BancoPE.Banco.entities.GeneroRole;
 public record ClienteRegistrarRecord(
         String nome,
         String cpf,
-        AcessoRole cargRole,
+        AcessoRole cargo,
         ClienteCartaoAuthentication cartao,
         GeneroRole genero,
         LocalDate nascimento,

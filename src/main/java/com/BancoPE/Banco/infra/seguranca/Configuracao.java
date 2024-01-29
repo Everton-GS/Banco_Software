@@ -31,10 +31,10 @@ public class Configuracao {
             .sessionManagement(session->session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             .authorizeHttpRequests(authorize -> authorize
                 .requestMatchers(HttpMethod.POST,"/agencia/cadastrar").permitAll()
-                .requestMatchers(HttpMethod.POST,"/gerente/registrar").permitAll()
+                .requestMatchers(HttpMethod.POST,"/gerente/funcionario/registrar").hasRole("gerente")
                 .requestMatchers(HttpMethod.PUT,"/gerente/bloquear").hasRole("gerente")
                 .requestMatchers(HttpMethod.PUT,"/gerente/estorno").hasRole("gerente")
-                .requestMatchers(HttpMethod.PUT,"/gerente/deposito").hasRole("gerente")
+                .requestMatchers(HttpMethod.PUT,"/gerente/deposito").hasAnyRole("gerete","atendente")
                 .requestMatchers(HttpMethod.POST,"/aplicacao/acessar/cliente").permitAll()
                 .requestMatchers(HttpMethod.POST,"/aplicacao/acessar/funcionario").permitAll()
                 .requestMatchers(HttpMethod.POST,"/cliente/registrar").hasRole("gerente")

@@ -59,7 +59,7 @@ public class ClienteController {
             if (clienteP.isEmpty()) {
                 Cliente cliente = new Cliente(clienteRegistrar.nome(), clienteRegistrar.cpf(),
                         clienteRegistrar.genero(), clienteRegistrar.nascimento(), clienteRegistrar.endereco(),
-                        clienteRegistrar.telefone(), clienteRegistrar.email(), clienteRegistrar.cargRole());
+                        clienteRegistrar.telefone(), clienteRegistrar.email(), clienteRegistrar.cargo());
                 clienteService.registrar(cliente);
 
                 Optional<ClienteCartaoAuthentication> cartao = cartaoAuthenticationRepository.findByUltimoCartao();
