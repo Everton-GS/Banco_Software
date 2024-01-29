@@ -45,13 +45,15 @@ Obs:A senha dentro do código é encryptada para a seguranaça da aplicação
 ```
 ```
 Acesso Gerente:
-         login:692.812.590-01
-         senha:Japão
+
+login:692.812.590-01
+senha:Japão
 ```
 ```
 Acesso Cliente:
-         login:0001-000001
-         senha:Espanha
+
+login:0001-000001
+senha:Espanha
 ```
 
 ## Tecnologia🛠️
