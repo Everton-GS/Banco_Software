@@ -36,7 +36,7 @@ O sistema foi containerizado utilizando o Docker com o objetivo de tornar mais f
 
 ## Inicialização aplicação
 ```
- docker-composer up --build -d
+ docker-compose up --build -d
 ```
 ```
 O sistema starta Usuário e Funcionário automaticamente.
@@ -54,6 +54,14 @@ Acesso Cliente:
 
 login:0001-000001
 senha:Espanha
+```
+
+## Acesso ao SGBD
+```
+Rota:http://localhost:8000/
+
+login:root
+senha:bp1234
 ```
 
 ## Tecnologia🛠️
