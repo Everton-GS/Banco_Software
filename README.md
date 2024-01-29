@@ -36,7 +36,7 @@ O sistema foi containerizado utilizando o Docker com o objetivo de tornar mais f
 
 ## Inicialização aplicação
 ```
- docker-composer up --build -d
+ docker-compose up --build -d
 ```
 ```
 O sistema starta Usuário e Funcionário automaticamente.
