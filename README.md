@@ -41,7 +41,7 @@ O sistema foi containerizado utilizando o Docker com o objetivo de tornar mais f
 ```
 O sistema starta Usuário e Funcionário automaticamente.
 
-Obs:A senha dentro do código é encryptada, para a seguranaça da aplicação
+Obs:A senha dentro do código é encryptada para a seguranaça da aplicação
 ```
 ```
 Acesso Gerente:692.812.590-01
