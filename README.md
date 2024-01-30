@@ -1,5 +1,7 @@
 # Banco Software
 
+<img src="https://grupovilario.com.br/images/segmentos/bancos2.jpg" width="900px" height="300px">
+
 ## 📚Informação👨‍🏫👩‍🎓
 O projeto foi concebido com intuinto de similar as operações dentro de um sistema de Banco. Atráves desse sistema, foi desenvolvido funcionalidades como transferência,deposito,estorno,extrato de conta, bloqueio de conta.
 
