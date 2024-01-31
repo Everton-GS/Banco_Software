@@ -1,5 +1,7 @@
 # Banco Software
 
+<img src="https://grupovilario.com.br/images/segmentos/bancos2.jpg" width="900px" height="300px">
+
 ## 📚Informação👨‍🏫👩‍🎓
 O projeto foi concebido com intuinto de similar as operações dentro de um sistema de Banco. Atráves desse sistema, foi desenvolvido funcionalidades como transferência,deposito,estorno,extrato de conta, bloqueio de conta.
 
@@ -15,6 +17,10 @@ O projeto foi concebido com intuinto de similar as operações dentro de um sist
 + Deposito em conta<br>
 + Bloquear cartão do cliente<br>
 + Estorno de pagamento realizado<br>
+
+<h3>Funcionalidade do Atendente<br></h3>
+
++ Deposito em conta<br>
 
 ## Arquitetura Software💻
 O projeto foi desenvolvido no padrão MVC (Model-View-Controller) é uma arquitetura de software que divide uma aplicação em três componentes principais para melhorar a organização e a manutenção do código
