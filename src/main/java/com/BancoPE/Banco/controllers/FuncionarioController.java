@@ -70,7 +70,7 @@ public class FuncionarioController {
                 String senhaB=new BCryptPasswordEncoder().encode(gerarSenha);
                 FuncionarioAuthentication funcionarioAuthentication = new FuncionarioAuthentication(funcionario, funcionarioRecord.cpf(), senhaB);
                 funcionarioAuthenticationService.registrar(funcionarioAuthentication);
-              //  emailService.emailAcesso(funcionarioRecord.cpf(),funcionarioRecord.email(), gerarSenha);
+                emailService.emailAcesso(funcionarioRecord.cpf(),funcionarioRecord.email(), gerarSenha);
                 return ResponseEntity.ok().build();
             }else{
                 return ResponseEntity.badRequest().build();
