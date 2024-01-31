@@ -20,14 +20,16 @@ import com.BancoPE.Banco.record.FuncionarioRegistrarRecord;
 import com.BancoPE.Banco.repository.AgenciaRepository;
 import com.BancoPE.Banco.repository.ClienteCartaoAuthenticationRepository;
 import com.BancoPE.Banco.repository.ExtratoCartaoRepository;
+import com.BancoPE.Banco.repository.FuncionarioAuthenticationRepository;
 import com.BancoPE.Banco.services.EmailService;
 import com.BancoPE.Banco.services.ExtratoCartaoService;
 import com.BancoPE.Banco.services.FuncionarioAuthenticationService;
 import com.BancoPE.Banco.services.FuncionarioService;
 import jakarta.transaction.Transactional;
+import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping(value = "/gerente")
+@RequestMapping(value = "/funcionario")
 public class FuncionarioController {
 
     @Autowired
@@ -43,6 +45,9 @@ public class FuncionarioController {
     AgenciaRepository agenciaRepository;
 
     @Autowired
+    FuncionarioAuthenticationRepository funcionarioAuthenticationRepository;
+
+    @Autowired
     ExtratoCartaoRepository extratoCartaoRepository;
 
     @Autowired
@@ -52,25 +57,25 @@ public class FuncionarioController {
     EmailService emailService;
 
     @Transactional(rollbackOn = Exception.class)
-    @PostMapping("/funcionario/registrar")
-    public ResponseEntity<?> registrar(@RequestBody FuncionarioRegistrarRecord funcionarioRecord) {
+    @PostMapping("/registrar")
+    public ResponseEntity<?> registrar(@RequestBody @Valid FuncionarioRegistrarRecord funcionarioRecord) {
         try {
             FuncionarioAuthentication funcionarioGerente= (FuncionarioAuthentication)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-            System.out.println(funcionarioGerente);
-            if (funcionarioGerente.getFuncionario().getAgencia()!=null) {
+            FuncionarioAuthentication funcionarioAuthenticationR = funcionarioAuthenticationRepository.findByLogin(funcionarioRecord.cpf());
+            
+            if (funcionarioGerente.getFuncionario().getAgencia()!=null && funcionarioAuthenticationR==null) {
                 Funcionario funcionario = new Funcionario(funcionarioRecord.cargo(),funcionarioGerente.getFuncionario().getAgencia(),funcionarioRecord.cpf(),funcionarioRecord.nome(),funcionarioRecord.genero(),  funcionarioRecord.nascimento(),funcionarioRecord.endereco(),funcionarioRecord.telefone(), funcionarioRecord.email());
                 funcionarioService.registrar(funcionario);
                 String gerarSenha=funcionarioAuthenticationService.gerarSenha();
                 String senhaB=new BCryptPasswordEncoder().encode(gerarSenha);
                 FuncionarioAuthentication funcionarioAuthentication = new FuncionarioAuthentication(funcionario, funcionarioRecord.cpf(), senhaB);
                 funcionarioAuthenticationService.registrar(funcionarioAuthentication);
-                emailService.emailAcesso(funcionarioRecord.cpf(),funcionarioRecord.email(), gerarSenha);
+              //  emailService.emailAcesso(funcionarioRecord.cpf(),funcionarioRecord.email(), gerarSenha);
                 return ResponseEntity.ok().build();
             }else{
                 return ResponseEntity.badRequest().build();
             }
         } catch (Exception e) {
-            e.printStackTrace();
             return ResponseEntity.internalServerError().build();
         }
     }

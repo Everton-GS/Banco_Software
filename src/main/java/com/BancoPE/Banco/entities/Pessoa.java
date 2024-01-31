@@ -21,11 +21,11 @@ import lombok.Setter;
 @MappedSuperclass
 public abstract class Pessoa {
     
-    @NotBlank
+    @NotBlank(message = "Nome em branco")
     @Column(name = "nome")
     private String nome;
 
-    @NotBlank
+    @NotBlank(message = "cpf em branco")
     @CPF
     @Column(name = "cpf")
     private String cpf;
@@ -39,7 +39,7 @@ public abstract class Pessoa {
     @Column(name = "nascimento")
     private LocalDate nascimento;
 
-    @NotBlank
+    @NotBlank(message = "endereço em branco")
     @Column(name = "endereco")
     private String endereco;
 

@@ -6,16 +6,18 @@ import com.BancoPE.Banco.entities.AcessoRole;
 import com.BancoPE.Banco.entities.ClienteCartaoAuthentication;
 import com.BancoPE.Banco.entities.GeneroRole;
 
+import jakarta.validation.constraints.NotNull;
+
 public record ClienteRegistrarRecord(
-        String nome,
-        String cpf,
+        @NotNull String nome,
+        @NotNull String cpf,
         AcessoRole cargo,
         ClienteCartaoAuthentication cartao,
         GeneroRole genero,
         LocalDate nascimento,
-        String endereco,
-        String telefone,
-        String email
+        @NotNull String endereco,
+        @NotNull String telefone,
+        @NotNull String email
 ) {
     
 }

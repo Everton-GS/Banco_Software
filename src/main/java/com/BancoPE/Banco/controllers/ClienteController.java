@@ -28,6 +28,7 @@ import com.BancoPE.Banco.services.ClienteService;
 import com.BancoPE.Banco.services.EmailService;
 import com.BancoPE.Banco.services.ExtratoCartaoService;
 import jakarta.transaction.Transactional;
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping(value = "/cliente")
@@ -53,7 +54,7 @@ public class ClienteController {
 
     @Transactional(rollbackOn = Exception.class)
     @PostMapping("/registrar")
-    public ResponseEntity<?> registrar(@RequestBody ClienteRegistrarRecord clienteRegistrar) {
+    public ResponseEntity<?> registrar(@Valid @RequestBody ClienteRegistrarRecord clienteRegistrar) {
         try {
             Optional<Cliente> clienteP = clienteRepository.findByCpf(clienteRegistrar.cpf());
             if (clienteP.isEmpty()) {
